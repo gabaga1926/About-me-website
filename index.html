@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">x
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,12 +10,12 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="#"> <img src="placeholderlogo.png" alt="Logo"/></a>
+    <a class="nav-logo" href="#"><img src="placeholderlogo.png" alt="EGA Logo" /></a>
     <ul class="nav-links">
       <li><a href="#" class="active">Home</a></li>
       <li><a href="#about">About Me</a></li>
       <li><a href="#cv">CV</a></li>
-      <li><a href="https://github.com/gabaga1926" target="_blank">GitHub</a></li>
+      <li><a href="https://github.com" target="_blank">GitHub</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
     </ul>
   </nav>
@@ -35,28 +35,28 @@
           <a href="#contact" class="btn btn-ghost">Contact me</a>
         </div>
       </div>
-      <div class="hero-avatar"><img src="HERO_PROFILE.jpg" alt="Erwin Gabriel Aga" /></div>
+      <div class="hero-avatar"><img src="HERO_PROFILE.jpg" alt="EGA Profile" /></div>
     </div>
   </div>
 
   <section id="about">
     <div class="section-label">Skills</div>
-    <div class="skills-grid">
-      <span class="skill-tag">HTML</span>
-      <span class="skill-tag">CSS</span>
-      <span class="skill-tag">JavaScript</span>
-      <span class="skill-tag">Python</span>
-      <span class="skill-tag">Photography</span>
-      <span class="skill-tag">Film Making</span>
-      <span class="skill-tag">Git</span>
-      <span class="skill-tag">UI Design</span>
+    <div class="skills-grid" id="skills-grid">
+      <span class="skill-tag" data-skill="html">HTML</span>
+      <span class="skill-tag" data-skill="css">CSS</span>
+      <span class="skill-tag" data-skill="js">JavaScript</span>
+      <span class="skill-tag" data-skill="python">Python</span>
+      <span class="skill-tag" data-skill="photo">Photography</span>
+      <span class="skill-tag" data-skill="film">Film Making</span>
+      <span class="skill-tag" data-skill="git">Git</span>
+      <span class="skill-tag" data-skill="ui">UI Design</span>
     </div>
   </section>
 
   <section id="portfolio">
     <div class="section-label">Featured Projects</div>
     <div class="projects-grid">
-      <button id="project-one" class="project-card" type="button">
+      <a href="#" class="project-card">
         <div class="project-thumb">🌐</div>
         <div class="project-title">Project One</div>
         <div class="project-desc">A short description of what this project does and why it's cool.</div>
@@ -64,16 +64,16 @@
           <span class="project-tag">HTML</span>
           <span class="project-tag">CSS</span>
         </div>
-      </button>
-      <button id="project-two" class="project-card" type="button">
+      </a>
+      <a href="#" class="project-card">
         <div class="project-thumb">📷</div>
         <div class="project-title">Photo Portfolio</div>
         <div class="project-desc">A gallery of my photography work and visual storytelling.</div>
         <div class="project-tags">
           <span class="project-tag">Photography</span>
         </div>
-      </button>
-      <button id="project-three" class="project-card" type="button">
+      </a>
+      <a href="#" class="project-card">
         <div class="project-thumb">🎬</div>
         <div class="project-title">Short Film</div>
         <div class="project-desc">A film I made for a school project</div>
@@ -81,7 +81,7 @@
           <span class="project-tag">Film</span>
           <span class="project-tag">Editing</span>
         </div>
-      </button>
+      </a>
     </div>
   </section>
 

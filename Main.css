@@ -424,3 +424,61 @@
       .nav-links a { padding: 6px 8px; font-size: 13px; }
       footer { flex-direction: column; gap: 10px; }
     }
+
+    /* ── SKILL DESCRIPTION BOX ── */
+.skill-tag { cursor: pointer; }
+.skill-tag.active {
+  border-color: var(--accent);
+  color: var(--accent2);
+  background: var(--surface2);
+}
+
+.skill-desc-box {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+  margin-top: 16px;
+}
+
+.skill-desc-box.open {
+  max-height: 160px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.skill-desc-inner {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.skill-desc-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+.skill-desc-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent2);
+  margin-bottom: 4px;
+}
+
+.skill-desc-level {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.skill-desc-text {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+} 

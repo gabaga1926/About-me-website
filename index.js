@@ -316,18 +316,147 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
 
-  // ───────────────────────────────────────────
-  //  END OF DOMContentLoaded
-  // ───────────────────────────────────────────
-});
+  // ═══════════════════════════════════════════
+  //  ★ FEATURE 10 — CLICKABLE SKILL TAGS
+  //  Clicking a skill tag reveals a description
+  //  box with your skill level and a short note.
+  //  Clicking the same tag again collapses it.
+  //  ─ HOW TO CUSTOMIZE ─
+  //  • Edit `skillData` entries with your own
+  //    level labels and descriptions.
+  //  • Add new entries matching the data-skill
+  //    attribute on each .skill-tag in HTML.
+  // ═══════════════════════════════════════════
+
+  const skillData = {
+    html:   { icon: '🌐', level: 'Learning',           desc: 'I can build well-structured, semantic HTML pages confidently. Forms, layouts, and accessibility basics are all in my toolkit.' },
+    css:    { icon: '🎨', level: 'Learning',           desc: 'Currently learning flexbox, grid, animations, and variables. which I used to build this very portfolio\'s visual design!' },
+    js:     { icon: '⚡', level: 'Novice',               desc: 'Barely know the basics, but I\'m eager to learn more about JavaScript and its applications.' },
+    python: { icon: '🐍', level: 'Beginner', desc: 'Still learning. I\'m comfortable with basics, data structures, and simple scripts. Still growing here.' },
+    photo:  { icon: '📷', level: 'Passionate',            desc: 'One of my main creative outlets. I love composing shots, working with natural light, and telling stories through a lens.' },
+    film:   { icon: '🎬', level: 'Hands-on',              desc: 'I\'ve written, shot, and edited short films for school projects. It\'s where my photography eye meets storytelling.' },
+    git:    { icon: '🔀', level: 'Learning',               desc: 'I use Git for version control on my projects — committing, branching, and pushing to GitHub is part of my workflow.' },
+    ui:     { icon: '✏️',  level: 'Growing',               desc: 'I\'m drawn to clean, intentional design. I think carefully about layout, typography, and color when building interfaces.' },
+  };
+
+  // Inject the skill description box styles
+  const skillStyle = document.createElement('style');
+  skillStyle.textContent = `
+    .skill-tag { cursor: pointer; }
+    .skill-tag.active {
+      border-color: var(--accent);
+      color: var(--accent2);
+      background: var(--surface2);
+    }
+    .skill-desc-box {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+      margin-top: 16px;
+    }
+    .skill-desc-box.open {
+      max-height: 160px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .skill-desc-inner {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .skill-desc-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .skill-desc-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--accent2);
+      margin-bottom: 4px;
+    }
+    .skill-desc-level {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .skill-desc-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+  `;
+  document.head.appendChild(skillStyle);
+
+  // Inject the description box HTML right after the skills-grid
+  const skillsGrid = document.getElementById('skills-grid');
+  if (skillsGrid) {
+    const descBox = document.createElement('div');
+    descBox.className = 'skill-desc-box';
+    descBox.id = 'skill-desc-box';
+    descBox.innerHTML = `
+      <div class="skill-desc-inner">
+        <div class="skill-desc-icon" id="skill-icon"></div>
+        <div>
+          <div class="skill-desc-name" id="skill-name"></div>
+          <div class="skill-desc-level" id="skill-level"></div>
+          <div class="skill-desc-text" id="skill-text"></div>
+        </div>
+      </div>
+    `;
+    skillsGrid.insertAdjacentElement('afterend', descBox);
+  }
+
+  // Wire up click handlers on each skill tag
+  let activeSkillTag = null;
+
+  skillTags.forEach((tag) => {
+    tag.addEventListener('click', () => {
+      const key = tag.dataset.skill;
+      const data = skillData[key];
+      const box = document.getElementById('skill-desc-box');
+
+      if (!data || !box) return;
+
+      // Clicking the already-active tag collapses the box
+      if (activeSkillTag === tag) {
+        tag.classList.remove('active');
+        box.classList.remove('open');
+        activeSkillTag = null;
+        return;
+      }
+
+      // Deactivate the previous tag
+      if (activeSkillTag) activeSkillTag.classList.remove('active');
+      tag.classList.add('active');
+      activeSkillTag = tag;
+
+      // Populate and reveal the description box
+      document.getElementById('skill-icon').textContent  = data.icon;
+      document.getElementById('skill-name').textContent  = tag.textContent.trim();
+      document.getElementById('skill-level').textContent = data.level;
+      document.getElementById('skill-text').textContent  = data.desc;
+      box.classList.add('open');
+    });
+  });
+
+
+}); // end DOMContentLoaded
 
 
 // ============================================================
 //  ✦ QUICK REFERENCE — things you'll commonly want to change
 //
-//  • Typing lines    → Feature 6, `lines` array
-//  • Contact email   → Feature 7, the mailto: string
-//  • Scroll offset   → Feature 5, NAV_HEIGHT constant
-//  • Animation speed → Feature 6, TYPING_SPEED / ERASE_SPEED
-//  • Ripple color    → Feature 8, the rgba() in rippleStyle
+//  • Typing lines      → Feature 6, `lines` array
+//  • Contact email     → Feature 7, the mailto: string
+//  • Scroll offset     → Feature 5, NAV_HEIGHT constant
+//  • Animation speed   → Feature 6, TYPING_SPEED / ERASE_SPEED
+//  • Ripple color      → Feature 8, the rgba() in rippleStyle
+//  • Skill descriptions→ Feature 10, `skillData` object
 // ============================================================
